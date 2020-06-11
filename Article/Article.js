@@ -102,12 +102,75 @@ const data = [
   Hint: You will need to use createElement more than once here!
 
   Your function should take either an object as its one argument, or 5 separate arguments mapping to each piece of the data object above.
+*/
+function articleCreator(
+  titleData,
+  dateData,
+  paraOneData,
+  paraTwoData,
+  paraThreeData
+) {
+  //Top article div
+  const article = document.createElement("div");
+  article.classList.add("article");
 
+  //h2 heading
+  const headingTitle = document.createElement("h2");
+  headingTitle.textContent = titleData;
+  article.appendChild(headingTitle);
+
+  //Heading date
+  const headingDate = document.createElement("p");
+  headingDate.classList.add("date");
+  headingDate.textContent = dateData;
+  article.appendChild(headingDate);
+
+  //Paragraph elements
+  const paraOne = document.createElement("p");
+  paraOne.textContent = paraOneData;
+  article.appendChild(paraOne);
+
+  const paraTwo = document.createElement("p");
+  paraTwo.textContent = paraTwoData;
+  article.appendChild(paraTwo);
+
+  const paraThree = document.createElement("p");
+  paraThree.textContent = paraThreeData;
+  article.appendChild(paraThree);
+
+  const spanButton = document.createElement("span");
+  spanButton.classList.add("expandButton");
+  const open = '\u2195';
+  spanButton.textContent = open;
+  article.appendChild(spanButton);
+
+/*
   Step 2: Add an event listener to the expandButton span. This listener should toggle the class 'article-open' on the 'article' div.
+*/
+spanButton.addEventListener("click", (event) => {
+  article.classList.toggle("article-open");
+});
 
-  Step 3: Don't forget to return something from your function!
-
-  Step 4: Outside your function, loop over the data. At each iteration you'll use your component to create an article and append it to the DOM inside the 'articles' div.
+/*
+  Step 3: Don't forget to return something from your function! */
+  return article;
+  
+  /*
+  Step 4: Outside your function, loop over the data. At each iteration you'll use your component to create an article and append it to the DOM inside the 'articles' div.*/
+  const articles = document.querySelector(".articles");
+data.forEach((object) => {
+  articles.appendChild(
+    articleCreator(
+      object.title,
+      object.date,
+      object.firstParagraph,
+      object.secondParagraph,
+      object.thirdParagraph
+    )
+  );
+});
+  
+  /*
 
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 */
